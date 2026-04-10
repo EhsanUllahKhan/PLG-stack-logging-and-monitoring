@@ -53,4 +53,3 @@ ruler:
   ring:
     kvstore:
       store: inmemory
-    

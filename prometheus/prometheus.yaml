@@ -1,0 +1,20 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+
+  # Prometheus self-monitoring (runs on this server - ai-logging-instance 10.0.0.10)
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # VM nodes — Node Exporter metrics (CPU, RAM, Disk, Network)
+  - job_name: 'vm-nodes'
+    static_configs:
+      - targets:
+          - '10.0.0.7:9100'           # target vm(internal IP - same VPC)
+        labels:
+          instance: 'eh-test-vm'
+          public_ip: '123.12.12.12'  #ip of that vm which you  want to fetch metrix
+          group: 'production'
